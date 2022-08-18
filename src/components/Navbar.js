@@ -4,15 +4,14 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
   return (
     <>
-      <nav>
-        <div className="navbar-container">
-          <NavLink
-            to="/contacts"
-            className={({isActive}) => (isActive ? 'link active': 'link')}
-          >
+      <nav className="navbar">
+        <div className="navbar__container">
+          <NavLink to="/contacts" className="navbar__btn">
             Contacts
           </NavLink>
-          <NavLink to="/contacts/create_contact" className="btn">Create Contact</NavLink>
+          <NavLink to="/contacts/create_contact" className="navbar__btn">
+            Create Contact
+          </NavLink>
         </div>
       </nav>
     </>
