@@ -10,9 +10,9 @@ function Navbar() {
             to="/contacts"
             className={({isActive}) => (isActive ? 'link active': 'link')}
           >
-            Home
+            Contacts
           </NavLink>
-          <NavLink to="/create_contact" className="btn">Create Contact</NavLink>
+          <NavLink to="/contacts/create_contact" className="btn">Create Contact</NavLink>
         </div>
       </nav>
     </>

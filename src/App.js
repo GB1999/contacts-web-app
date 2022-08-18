@@ -3,7 +3,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
-import Home from "./pages/Home";
+import Contacts from "./pages/Contacts";
 import SharedLayout from "./pages/SharedLayout";
 import EditContact from "./pages/EditContact";
 import CreateContact from "./pages/CreateContact";
@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/contacts" element={<SharedLayout />}>
-            <Route index element={<Home />} />
+            <Route index element={<Contacts />} />
             <Route path="create_contact" element={<CreateContact />} />
             <Route path="edit_contact/:contact_id" element={<EditContact />} />
             <Route path="*" element={<Error />} />
