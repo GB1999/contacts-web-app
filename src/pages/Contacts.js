@@ -1,11 +1,15 @@
-import { Link } from "react-router-dom";
+import { motion, AnimateSharedLayout } from "framer-motion";
 
 import contacts from "../data/contactData";
 import ContactCard from "../components/ContactCard";
 const Contacts = () => {
   return (
-    
-      <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <AnimateSharedLayout>
         {contacts.map((contact) => {
           return (
             <ContactCard
@@ -17,8 +21,8 @@ const Contacts = () => {
             ></ContactCard>
           );
         })}
-      </div>
-
+      </AnimateSharedLayout>
+    </motion.div>
   );
 };
 
