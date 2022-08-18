@@ -1,20 +1,24 @@
-import { Link } from 'react-router-dom';
-import contacts from '../data/contactData';
+import { Link } from "react-router-dom";
 
+import contacts from "../data/contactData";
+import ContactCard from "../components/ContactCard";
 const Contacts = () => {
   return (
-    <section className='section'>
-      <div className='products'>
+    
+      <div>
         {contacts.map((contact) => {
           return (
-            <article key={contact.id}>
-              <h5>{contact.firstName}</h5>
-              <Link to={`/contacts/edit_contact/${contact.id}`}>edit contact</Link>
-            </article>
+            <ContactCard
+              id={contact.id}
+              firstName={contact.firstName}
+              lastName={contact.lastName}
+              phone={contact.phone}
+              email={contact.email}
+            ></ContactCard>
           );
         })}
       </div>
-    </section>
+
   );
 };
 
