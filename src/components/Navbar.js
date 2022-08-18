@@ -1,19 +1,22 @@
-import React from 'react'
-import {Link} from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
     <>
-    <nav className='navbar'>
-        <div className='navbar-container'>
-            <Link to = "/" className="navbar-logo">
-                TRVL <i class="fab fa-typo3"></i>
-            </Link>
-
+      <nav>
+        <div className="navbar-container">
+          <NavLink
+            to="/contacts"
+            className={({isActive}) => (isActive ? 'link active': 'link')}
+          >
+            Home
+          </NavLink>
+          <NavLink to="/create_contact" className="btn">Create Contact</NavLink>
         </div>
-    </nav>
+      </nav>
     </>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

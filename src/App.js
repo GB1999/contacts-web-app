@@ -1,23 +1,26 @@
 import "./App.css";
-import Navbar from "./components/Navbar";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/Home";
+import SharedLayout from "./pages/SharedLayout";
 import EditContact from "./pages/EditContact";
 import CreateContact from "./pages/CreateContact";
-
+import Error from "./pages/Error";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/create_contact" element={<CreateContact/>}/>
-          <Route path="/edit_contact" element={<EditContact/>}/>
+          <Route path="/contacts" element={<SharedLayout />}>
+            <Route index element={<Home />} />
+            <Route path="create_contact" element={<CreateContact />} />
+            <Route path="edit_contact/:contact_id" element={<EditContact />} />
+            <Route path="*" element={<Error />} />
+          </Route>
         </Routes>
-        
       </BrowserRouter>
     </>
   );
