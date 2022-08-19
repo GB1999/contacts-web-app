@@ -6,7 +6,7 @@ import Navbar from "../Navbar";
 import "./Header.css";
 import SearchBar from "../SearchBar";
 import { useState, useEffect } from "react";
-
+import { NavLink } from "react-router-dom";
 const Header = () => {
   const [showSearch, shouldShowSearch] = useState(false);
   const [lastYPos, setLastYPos] = useState(300);
@@ -31,9 +31,9 @@ const Header = () => {
     <motion.div className="header">
       <div className="header-top">
         <div className="header-top__logo">
-          <a href="/" className="header-logo">
-            Contacts
-          </a>
+        <NavLink to="/contacts/create_contact" className="header-top__logo">
+            Create Contact
+          </NavLink>
         </div>
         <div className="header-top__navbar">
           <div className="header-top__navigation">

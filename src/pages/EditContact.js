@@ -12,8 +12,11 @@ import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { motion, AnimateSharedLayout } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { editContact } from "../features/contacts/contactsSlice";
 
 const EditContact = () => {
+  const dispatch = useDispatch();
   const { contact_id } = useParams();
   const {
     register,
@@ -22,22 +25,34 @@ const EditContact = () => {
     formState: { errors },
   } = useForm();
 
-  const [isFocused, setFocused] = useState(false)
+  const [isFocused, setFocused] = useState(false);
 
+  const onSubmit = (data, event) => {
+    event.preventDefault();
+    console.log(data);
+    const editedContact = {
+      id: contact_id,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+    };
+    dispatch(editContact({id: contact_id, payload: editedContact }));
+  };
 
-  const onSubmit = (data) => console.log(data);
+  const onError = () => {
+    console.log("ERROR");
+  };
 
   const focusVarients = {
     notFocused: {
-
-        borderColor: "#000",
-        outerWidth:0
+      borderColor: "#000",
+      outerWidth: 0,
     },
     focused: {
-
-      borderColor:"#111",
-      outerWidth:2
-    }
+      borderColor: "#111",
+      outerWidth: 2,
+    },
   };
 
   return (
@@ -51,7 +66,7 @@ const EditContact = () => {
       <motion.div className="edit-contact__card" layout>
         <AnimateSharedLayout>
           <motion.div className="edit-contact__form" layout>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit, onError)}>
               <p className="form-label"> First Name</p>
               <motion.input
                 whileHover={{ scale: 1.02 }}
@@ -59,7 +74,10 @@ const EditContact = () => {
                 animate={!isFocused ? "notFocused" : "focused"}
                 variants={focusVarients}
                 layout
-                onFocus={(focus)=>{setFocused(focus); console.log(isFocused)}}
+                onFocus={(focus) => {
+                  setFocused(focus);
+                  console.log(isFocused);
+                }}
                 className="text-input"
                 {...register("firstName", {
                   required: "name is required",
@@ -90,7 +108,7 @@ const EditContact = () => {
               <motion.input
                 whileHover={{ scale: 1.02 }}
                 transition={{ layout: { duration: 1, type: "spring" } }}
-                whileFocus={{borderColor:"#FFF"}}
+                whileFocus={{ borderColor: "#FFF" }}
                 className="text-input"
                 {...register("lastName", {
                   required: "Last name is required",
