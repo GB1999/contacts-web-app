@@ -29,15 +29,14 @@ const CreateContact = () => {
 
   const onSubmit = (data, event) => {
     event.preventDefault();
-    console.log(data);
     const newContact = {
-      id: contact_id,
+      id: 1,
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       phone: data.phone,
     };
-    dispatch(addContact({ payload: {newContact:newContact }}));
+    dispatch(addContact({newContact }));
   };
 
   const onError = () => {
@@ -200,7 +199,7 @@ const CreateContact = () => {
 
               <input
                 type="submit"
-                value="Save Contact"
+                value="Create Contact"
                 className="submit-btn"
               />
             </form>

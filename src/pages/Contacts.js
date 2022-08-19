@@ -1,8 +1,9 @@
 import { motion, AnimateSharedLayout } from "framer-motion";
-
-import contacts from "../data/contactData";
+import { useSelector } from "react-redux";
 import ContactCard from "../components/ContactCard";
+
 const Contacts = () => {
+  const {contacts} = useSelector((state)=>state.contacts);
   return (
     <>
 

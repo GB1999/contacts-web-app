@@ -13,13 +13,15 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     addContact: (state, { payload }) => {
+      console.log(`Creating contact ${payload.newContact.id}`)
+      console.log(payload.newContact)
       state.contacts = [...state.contacts, payload.newContact];
     },
 
     editContact: (state, { payload }) => {
-      console.log(`Editing contact ${payload.id}`)
+      console.log(`Editing contact ${payload.editedContact.id}`)
       state.contacts = state.contacts.map((contact) =>
-        contact.id === payload.id ? payload.editedContact : contact
+        contact.id === payload.editedContact.id ? payload.editedContact : contact
       );
     },
     removeContacts: (state) => {

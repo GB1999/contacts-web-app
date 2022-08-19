@@ -9,7 +9,7 @@
 //   export default EditContact;
 
 import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { useDispatch } from "react-redux";
@@ -17,7 +17,6 @@ import { editContact } from "../features/contacts/contactsSlice";
 
 const EditContact = () => {
   const dispatch = useDispatch();
-  const { contact_id } = useParams();
   const {
     register,
     handleSubmit,
@@ -25,19 +24,29 @@ const EditContact = () => {
     formState: { errors },
   } = useForm();
 
+
+
+
+  let location = useLocation();
+  let props = location.state;
+  console.log(location);
   const [isFocused, setFocused] = useState(false);
+  const [firstName_text, setFirstName] = useState(props.firstName);
+  const [lastName_text, setLastName] = useState(props.lastName);
+  const [email_text, setEmail] = useState(props.email);
+  const [phone_text, setPhone] = useState(props.phone);
 
   const onSubmit = (data, event) => {
     event.preventDefault();
     console.log(data);
     const editedContact = {
-      id: contact_id,
+      id: props.id,
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       phone: data.phone,
     };
-    dispatch(editContact({id: contact_id, payload: editedContact }));
+    dispatch(editContact({editedContact}));
   };
 
   const onError = () => {
@@ -90,7 +99,8 @@ const EditContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-                placeholder="john"
+                value={firstName_text}
+                onChange={event => setFirstName(event.target.value)}
               />
 
               {errors.firstName && (
@@ -121,7 +131,8 @@ const EditContact = () => {
                     message: "Minimum length is 2",
                   },
                 })}
-                placeholder="doe"
+                value={lastName_text}
+                onChange={event => setLastName(event.target.value)}
               />
 
               {errors.lastName && (
@@ -152,7 +163,8 @@ const EditContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-                placeholder="1321"
+                value={phone_text}
+                onChange={event => setPhone(event.target.value)}
               />
 
               {errors.phone && (
@@ -184,7 +196,8 @@ const EditContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-                placeholder="jd@gmail.com"
+                value={email_text}
+                onChange={event => setEmail(event.target.value)}
               />
 
               {errors.email && (
