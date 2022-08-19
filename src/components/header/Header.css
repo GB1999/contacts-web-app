@@ -4,8 +4,19 @@
     width: 100%;
     flex: 1;
     flex-direction: column;
+    z-index: 1;
+    
 
-    background-color: wheat;
+    overflow: hidden;
+    box-shadow: 0 2px 20px var(--grey-900);
+    background-color: rgb(2, 0, 90);
+    padding: .5rem 1rem 0rem 1rem;
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-between;
+    cursor: pointer;
+  
   }
   
   .header-top {
@@ -19,6 +30,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 20px;
+    color: aliceblue;
   }
   
   .header-logo {
@@ -50,44 +62,15 @@
   }
   
   .header-bottom {
+
+    overflow: hidden;
+    background-color: var(--onPrimary-100);
+    
+    outline: 2px  solid rgb(0, 30, 128);
+    padding: .5rem 1rem 0rem 1rem;
     display: flex;
-    flex: 1;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 6px;
+    flex-direction: row;
+
   }
   
-  .header-bottom__email {
-    margin-right: 55px;
-  }
   
-  .header-bottom__phone {
-    margin-right: 65px;
-  }
-  
-  .header-bottom__bag {
-    position: absolute;
-    display: flex;
-  }
-  
-  .header-bottom__bag-icon {
-    position: relative;
-    display: flex;
-    left: -5px;
-    width: 30px;
-    height: 30px; 
-  }
-  
-  .header-bottom__bag-count {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: RobotoRegular;
-    right: 0px;
-    top: -5px;
-    width: 20px;
-    height: 20px;
-    background-color: red;
-    border-radius: 10px;
-    color: white}

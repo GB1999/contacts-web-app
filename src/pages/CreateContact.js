@@ -40,7 +40,7 @@ const CreateContact = () => {
   };
 
   const onError = () => {
-    console.log("ERROR");
+    console.log("Submission Error");
   };
 
   const focusVarients = {
