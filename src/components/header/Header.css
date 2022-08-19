@@ -10,7 +10,7 @@
     overflow: hidden;
     box-shadow: 0 2px 20px var(--grey-900);
     background-color: rgb(2, 0, 90);
-    padding: .5rem 1rem 0rem 1rem;
+
     display: flex;
     flex-direction: column;
 
@@ -63,13 +63,13 @@
   
   .header-bottom {
 
-    overflow: hidden;
-    background-color: var(--onPrimary-100);
-    
-    outline: 2px  solid rgb(0, 30, 128);
+
     padding: .5rem 1rem 0rem 1rem;
-    display: flex;
+    flex: 1;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
 
   }
   

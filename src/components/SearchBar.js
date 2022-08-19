@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { searchContacts, setSearch } from "../features/contacts/contactsSlice";
-
+import { FaSearch, FaSort } from "react-icons/fa";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { useForm } from "react-hook-form";
 
@@ -38,8 +38,9 @@ const SearchBar = ({ placeholder, data }) => {
   };
 
   return (
-    <div className="search-bar">
-      <div>
+    <motion.div className="search-bar">
+      <motion.div className="search-bar__container">
+        <FaSearch className="search-bar__icon" />
         <motion.input
           className="search-bar__input"
           whileHover={{ scale: 1.02 }}
@@ -53,11 +54,21 @@ const SearchBar = ({ placeholder, data }) => {
           }}
           placeholder="Search for Contacts..."
         />
-
-
-        <div className="searchIcon"></div>
-      </div>
-    </div>
+       
+      </motion.div>
+      <div>
+          <btn className="search-bar__sort-btn">
+            <FaSort />
+            Sort
+          </btn>
+          <btn className="search-bar__sort-btn">
+            <FaSort />
+          </btn>
+          <btn className="search-bar__sort-btn">
+            <FaSort />
+          </btn>
+        </div>
+    </motion.div>
   );
 };
 

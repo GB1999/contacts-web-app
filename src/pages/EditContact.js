@@ -72,6 +72,7 @@ const EditContact = () => {
       layout
       className="edit-contact"
     >
+        <div className="header-spacer"></div>
       <motion.div className="edit-contact__card" layout>
         <AnimateSharedLayout>
           <motion.div className="edit-contact__form" layout>
@@ -80,13 +81,8 @@ const EditContact = () => {
               <motion.input
                 whileHover={{ scale: 1.02 }}
                 transition={{ layout: { duration: 1, type: "spring" } }}
-                animate={!isFocused ? "notFocused" : "focused"}
-                variants={focusVarients}
                 layout
-                onFocus={(focus) => {
-                  setFocused(focus);
-                  console.log(isFocused);
-                }}
+                
                 className="text-input"
                 {...register("firstName", {
                   required: "name is required",
@@ -118,7 +114,6 @@ const EditContact = () => {
               <motion.input
                 whileHover={{ scale: 1.02 }}
                 transition={{ layout: { duration: 1, type: "spring" } }}
-                whileFocus={{ borderColor: "#FFF" }}
                 className="text-input"
                 {...register("lastName", {
                   required: "Last name is required",

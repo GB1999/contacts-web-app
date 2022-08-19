@@ -6,12 +6,19 @@ import Navbar from "../Navbar";
 import "./Header.css";
 import SearchBar from "../SearchBar";
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 const Header = () => {
   const [showSearch, shouldShowSearch] = useState(true);
   const [lastYPos, setLastYPos] = useState(300);
+  const location = useLocation();
+
+  let isEditing = location.pathname.includes('edit_contact');
+
 
   useEffect(() => {
+    if(isEditing){
+      shouldShowSearch(false);
+    }
     function handleScroll() {
       console.log("scrolled");
       const yPos = window.scrollY;
@@ -44,7 +51,7 @@ const Header = () => {
           </motion.div>
           <motion.hr className="header-top__seperator" />
         </motion.div>
-
+      
       </motion.div >
       {showSearch && (
         <motion.div
