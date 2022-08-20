@@ -38,10 +38,17 @@ const SearchBar = ({ placeholder, data }) => {
   };
 
   return (
-    <motion.div className="search-bar">
-      <motion.div className="search-bar__container">
+    <motion.div
+      className="search-bar"
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div className="search-bar__container" layout>
         <FaSearch className="search-bar__icon" />
         <motion.input
+          layout
           className="search-bar__input"
           whileHover={{ scale: 1.02 }}
           type="text"
@@ -54,20 +61,15 @@ const SearchBar = ({ placeholder, data }) => {
           }}
           placeholder="Search for Contacts..."
         />
-       
       </motion.div>
-      <div>
-          <btn className="search-bar__sort-btn">
-            <FaSort />
-            Sort
-          </btn>
-          <btn className="search-bar__sort-btn">
-            <FaSort />
-          </btn>
-          <btn className="search-bar__sort-btn">
-            <FaSort />
-          </btn>
-        </div>
+      <motion.div layout className="search-bar__filter">
+        <btn className="search-bar__sort-btn">
+          <FaSort />
+        </btn>
+        <btn className="search-bar__sort-btn">
+          Sort By:
+        </btn>
+      </motion.div>
     </motion.div>
   );
 };

@@ -8,6 +8,7 @@ const initialState = {
   amount: 5,
   isLoading: true,
   isSearching: false,
+  isDeleting: false,
 };
 
 const contactsSlice = createSlice({
@@ -28,13 +29,18 @@ const contactsSlice = createSlice({
           : contact
       );
     },
+    setDelete: (state, payload) => {
+      
+      console.log("NOW DELETING CONTACTS");
+      state.isDeleting = payload;
+    },
+    markForDeletion: (state, { payload }) => {
+      state.contactsToDelete = [...state.contactsToDelete, payload.id];
+    },
     removeContacts: (state) => {
       state.contactEntries = state.contactEntries.filter(
         (contact) => !state.contactsToDelete.includes(contact.id)
       );
-    },
-    markForDeletion: (state, { payload }) => {
-      state.contactsToDelete = [...state.contactsToDelete, payload.id];
     },
     setSearch: (state, payload) => {
       console.log(payload);
@@ -66,6 +72,7 @@ const contactsSlice = createSlice({
 
 export const {
   addContact,
+  setDelete,
   removeContacts,
   editContact,
   setSearch,

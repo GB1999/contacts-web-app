@@ -12,11 +12,10 @@ const Header = () => {
   const [lastYPos, setLastYPos] = useState(300);
   const location = useLocation();
 
-  let isEditing = location.pathname.includes('edit_contact');
-
+  let isEditing = location.pathname.includes("edit_contact");
 
   useEffect(() => {
-    if(isEditing){
+    if (isEditing) {
       shouldShowSearch(false);
     }
     function handleScroll() {
@@ -49,22 +48,10 @@ const Header = () => {
           <motion.div className="header-top__navigation">
             <Navbar />
           </motion.div>
-          <motion.hr className="header-top__seperator" />
+
         </motion.div>
-      
-      </motion.div >
-      {showSearch && (
-        <motion.div
-          layout
-          className="header-bottom"
-          initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          
-        >
-          <SearchBar />
-        </motion.div>
-      )}
+      </motion.div>
+      {showSearch && <SearchBar />}
     </motion.div>
   );
 };
