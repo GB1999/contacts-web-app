@@ -9,6 +9,7 @@
     bottom: 2em;
     max-height: 52px;
     z-index: 1;
+    
 }
 .fab-container.open {
     max-height: max-content;
@@ -26,9 +27,11 @@
     cursor: pointer;
     position: relative;
     transition: all .1s ease-in;
+    
 }
 .fab-container .fab-button {
     background-color: #ff0000;
+    backdrop-filter: blur(10px);
     opacity: .8;
 }
 .fab-container .fab-button svg {

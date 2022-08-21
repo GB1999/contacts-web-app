@@ -63,12 +63,10 @@ const SearchBar = ({ placeholder, data }) => {
         />
       </motion.div>
       <motion.div layout className="search-bar__filter">
-        <btn className="search-bar__sort-btn">
+        <button className="search-bar__sort-btn">
           <FaSort />
-        </btn>
-        <btn className="search-bar__sort-btn">
-          Sort By:
-        </btn>
+        </button>
+        <button className="search-bar__sort-btn">Sort By:</button>
       </motion.div>
     </motion.div>
   );

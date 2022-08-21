@@ -21,6 +21,7 @@ const Contacts = () => {
     email: "",
     phone: "",
   });
+
   const actions = [
     { label: "About", icon: <FcAbout />, onClick: console.log },
     { label: "Profile", icon: <FcBusinessman />, onClick: console.log },
