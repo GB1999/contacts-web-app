@@ -334,6 +334,7 @@ ul {
   align-items: center;
   justify-items: center;
   font-size: 2rem;
+  white-space: nowrap
 }
 
 .contact-detail__section {

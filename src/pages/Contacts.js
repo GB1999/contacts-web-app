@@ -29,35 +29,30 @@ const Contacts = () => {
     { label: "Trash", icon: <FcFullTrash />, onClick: console.log },
   ];
 
-
   const detailView = useRef(null);
 
+  // expand contact callback for each card
   const expandContact = (id) => {
+    setSelectedContact(
+      contactEntries.find(function (e) {
+        return e.id == id;
+      })
+    );
     console.log(id);
     //if contact is already expanded
     if (expandedID == id) {
+      // collapse currently expanded conta
       detailView.current.classList.remove("expanded");
       setExpandedID(null);
-      setSelectedContact(
-        contactEntries.find(function (e) {
-          return e.id == expandedID;
-        })
-      );
     } else {
       // if no contact expanded
       if (expandedID == null) {
-        // console.log("Collapsing current expanded view");
+        //expanded detail view
         detailView.current.classList.add("expanded");
-      } else {
-        // console.log("Replacing Current expanded view");
       }
       setExpandedID(id);
-      setSelectedContact(
-        contactEntries.find(function (e) {
-          return e.id == expandedID;
-        })
-      );
     }
+    
     console.log(selectedContact);
     console.log(`Expanding: ${isExpanded}`);
   };
@@ -72,7 +67,7 @@ const Contacts = () => {
         className="contacts"
       >
         <div className="contacts__list">
-        <FAB actions={actions}></FAB>
+          <FAB actions={actions}></FAB>
           <AnimateSharedLayout>
             {isSearching
               ? searchResults.map((contact) => {

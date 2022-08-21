@@ -24,26 +24,29 @@ const EditContact = () => {
     formState: { errors },
   } = useForm();
 
+
+
+
   let location = useLocation();
   let props = location.state;
-  console.log(location);
+  console.log(props);
   const [isFocused, setFocused] = useState(false);
-  const [firstName_text, setFirstName] = useState(props.firstName);
-  const [lastName_text, setLastName] = useState(props.lastName);
-  const [email_text, setEmail] = useState(props.email);
-  const [phone_text, setPhone] = useState(props.phone);
+  const [firstName_text, setFirstName] = useState(props.contact.firstName);
+  const [lastName_text, setLastName] = useState(props.contact.lastName);
+  const [email_text, setEmail] = useState(props.contact.email);
+  const [phone_text, setPhone] = useState(props.contact.phone);
 
   const onSubmit = (data, event) => {
     event.preventDefault();
     console.log(data);
     const editedContact = {
-      id: props.id,
+      id: props.contact.id,
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
       phone: data.phone,
     };
-    dispatch(editContact({ editedContact }));
+    dispatch(editContact({editedContact}));
   };
 
   const onError = () => {
@@ -69,7 +72,7 @@ const EditContact = () => {
       layout
       className="edit-contact"
     >
-      <div className="header-spacer"></div>
+        <div className="header-spacer"></div>
       <motion.div className="edit-contact__card" layout>
         <AnimateSharedLayout>
           <motion.div className="edit-contact__form" layout>
@@ -79,6 +82,7 @@ const EditContact = () => {
                 whileHover={{ scale: 1.02 }}
                 transition={{ layout: { duration: 1, type: "spring" } }}
                 layout
+                
                 className="text-input"
                 {...register("firstName", {
                   required: "name is required",
@@ -92,7 +96,7 @@ const EditContact = () => {
                   },
                 })}
                 value={firstName_text}
-                onChange={(event) => setFirstName(event.target.value)}
+                onChange={event => setFirstName(event.target.value)}
               />
 
               {errors.firstName && (
@@ -123,7 +127,7 @@ const EditContact = () => {
                   },
                 })}
                 value={lastName_text}
-                onChange={(event) => setLastName(event.target.value)}
+                onChange={event => setLastName(event.target.value)}
               />
 
               {errors.lastName && (
@@ -155,7 +159,7 @@ const EditContact = () => {
                   },
                 })}
                 value={phone_text}
-                onChange={(event) => setPhone(event.target.value)}
+                onChange={event => setPhone(event.target.value)}
               />
 
               {errors.phone && (
@@ -188,7 +192,7 @@ const EditContact = () => {
                   },
                 })}
                 value={email_text}
-                onChange={(event) => setEmail(event.target.value)}
+                onChange={event => setEmail(event.target.value)}
               />
 
               {errors.email && (
