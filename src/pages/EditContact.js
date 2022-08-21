@@ -8,8 +8,8 @@
 //   };
 //   export default EditContact;
 
-import React, { useState } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useParams, useLocation, useHistory, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { useDispatch } from "react-redux";
@@ -26,15 +26,17 @@ const EditContact = () => {
 
 
 
-
+  let navigate = useNavigate();
   let location = useLocation();
   let props = location.state;
-  console.log(props);
+  console.log(location);
   const [isFocused, setFocused] = useState(false);
   const [firstName_text, setFirstName] = useState(props.contact.firstName);
   const [lastName_text, setLastName] = useState(props.contact.lastName);
   const [email_text, setEmail] = useState(props.contact.email);
   const [phone_text, setPhone] = useState(props.contact.phone);
+  const [editSuccess, setEditSuccess] = useState(false);
+
 
   const onSubmit = (data, event) => {
     event.preventDefault();
@@ -47,7 +49,16 @@ const EditContact = () => {
       phone: data.phone,
     };
     dispatch(editContact({editedContact}));
+    setEditSuccess(true);
   };
+
+  
+  useEffect(()=> {
+    if(editSuccess){
+      navigate("/contacts");
+    }
+  })
+
 
   const onError = () => {
     console.log("ERROR");
