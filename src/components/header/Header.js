@@ -4,19 +4,22 @@ import { motion } from "framer-motion";
 import Navbar from "../Navbar";
 
 import "./Header.css";
-import SearchBar from "../SearchBar";
+import SearchBar from "../searchBar/SearchBar";
 import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setIsExpanded } from "../../features/contacts/contactsSlice";
 const Header = () => {
   const [showSearch, shouldShowSearch] = useState(true);
   const [lastYPos, setLastYPos] = useState(300);
   const location = useLocation();
+  const dispatch = useDispatch();
 
-  let isEditing = location.pathname.includes('edit_contact');
-
+  let isEditing = location.pathname.includes("edit_contact");
+  let isCreating = location.pathname.includes("create_contact");
 
   useEffect(() => {
-    if(isEditing){
+    if (isEditing || isCreating) {
       shouldShowSearch(false);
     }
     function handleScroll() {
@@ -40,31 +43,33 @@ const Header = () => {
       transition={{ layout: { duration: 1, type: "spring" } }}
     >
       <motion.div className="header-top" layout>
-        <motion.div className="header-top__logo" layout>
-          <NavLink to="/contacts/create_contact" className="header-top__logo">
-            Contact
-          </NavLink>
+        <Link to="/contacts" className="header-top__logo">
+          <img
+            src="https://i.imgur.com/JdzBcpm.png"
+            alt="HOME"
+            width="180"
+            height="65"
+          />
+          CONTACTS
+        </Link>
+
+        <motion.div className="header-top__navigation">
+          <div
+            onClick={() => {
+              dispatch(setIsExpanded(false));
+            }}
+          >
+            <Link
+              to="/contacts/create_contact"
+              className="header-top__navigation-btn"
+            >
+              Create Contact
+            </Link>
+          </div>
         </motion.div>
-        <motion.div className="header-top__navbar" layout>
-          <motion.div className="header-top__navigation">
-            <Navbar />
-          </motion.div>
-          <motion.hr className="header-top__seperator" />
-        </motion.div>
-      
-      </motion.div >
-      {showSearch && (
-        <motion.div
-          layout
-          className="header-bottom"
-          initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          
-        >
-          <SearchBar />
-        </motion.div>
-      )}
+      </motion.div>
+
+      {showSearch && <SearchBar />}
     </motion.div>
   );
 };

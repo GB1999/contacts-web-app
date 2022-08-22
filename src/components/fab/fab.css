@@ -8,23 +8,31 @@
     right: 2em;
     bottom: 2em;
     max-height: 52px;
+    z-index: 1;
+    
 }
 .fab-container.open {
     max-height: max-content;
 }
 .fab-container li {
-    border-radius: 50%;
+    border-radius: 3rem;
     box-shadow: 0 3px 6px lightgrey;
-    display: grid;
-    place-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
     margin: 8px 0;
     font-size: 28px;
     padding: 12px;
     cursor: pointer;
     position: relative;
+    transition: all .1s ease-in;
+    
 }
 .fab-container .fab-button {
-    background-color: #00a8ff;
+    background-color: #ff0000;
+    backdrop-filter: blur(10px);
+    opacity: .8;
 }
 .fab-container .fab-button svg {
     fill: white;
@@ -34,8 +42,8 @@
     transition: transform 300ms, opacity 300ms;
     opacity: 0;
 }
-.fab-container .fab-action:hover .tooltip {
-    transform: translateX(-100%) scale(1);
+.fab-container .fab-button:hover  {
+    transform:scale(1.02);
     opacity: 1;
 }
 .fab-container .fab-action.open {

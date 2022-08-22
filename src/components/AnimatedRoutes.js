@@ -11,16 +11,16 @@ import Error from "../pages/Error";
 const AnimatedRoutes = () => {
   const location = useLocation();
   return (
-    <AnimatePresence>
+
       <Routes location={location} key={location.pathname}>
         <Route path="/contacts" element={<SharedLayout />}>
           <Route index element={<Contacts />} />
           <Route path="create_contact" element={<CreateContact />} />
-          <Route path="edit_contact/:contact_id" element={<EditContact />} />
+          <Route path="edit_contact/" element={<EditContact />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
-    </AnimatePresence>
+
   );
 };
 
