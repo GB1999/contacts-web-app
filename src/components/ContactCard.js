@@ -53,7 +53,7 @@ const ContactCard = ({
             </div>
           </div>
         </div>
-        <FaEdit layout className="contact-card__body__icon"></FaEdit>
+        {/* <FaEdit layout className="contact-card__body__icon" ></FaEdit> */}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@
 //   export default EditContact;
 
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useLocation, useHistory, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { useDispatch } from "react-redux";

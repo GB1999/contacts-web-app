@@ -4,18 +4,22 @@ import { motion } from "framer-motion";
 import Navbar from "../Navbar";
 
 import "./Header.css";
-import SearchBar from "../SearchBar";
+import SearchBar from "../searchBar/SearchBar";
 import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setIsExpanded } from "../../features/contacts/contactsSlice";
 const Header = () => {
   const [showSearch, shouldShowSearch] = useState(true);
   const [lastYPos, setLastYPos] = useState(300);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   let isEditing = location.pathname.includes("edit_contact");
+  let isCreating = location.pathname.includes("create_contact");
 
   useEffect(() => {
-    if (isEditing) {
+    if (isEditing || isCreating) {
       shouldShowSearch(false);
     }
     function handleScroll() {
@@ -40,16 +44,19 @@ const Header = () => {
     >
       <motion.div className="header-top" layout>
        
-          <NavLink to="/contacts" className="header-top__logo" >
+          <Link to="/contacts" className="header-top__logo" >
           <img src="https://i.imgur.com/JdzBcpm.png" alt="HOME"  width="180" height="65"/> 
           CONTACTS
-          </NavLink>
+          </Link>
 
        
           <motion.div className="header-top__navigation">
-          <NavLink to="/contacts/create_contact" className="header-top__navigation-btn">
+            <div onClick={()=>{dispatch(setIsExpanded(false));}}>
+            <Link to="/contacts/create_contact" className="header-top__navigation-btn">
             Create Contact
-          </NavLink>
+          </Link>
+            </div>
+          
           </motion.div>
 
         </motion.div>

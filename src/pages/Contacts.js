@@ -1,18 +1,21 @@
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { FcAbout, FcBusinessman, FcCamera, FcFullTrash } from "react-icons/fc";
 
-import { useSelector } from "react-redux";
-import { useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useRef, useEffect } from "react";
 import ContactCard from "../components/ContactCard";
-import ContactDetail from "../components/ContactDetail";
-import FAB from "../components/fab/fab";
+import ContactDetail from "../components/contactDetail/ContactDetail";
+import {
+  setIsExpanded,
+  sortContacts,
+  sortSearchResults,
+} from "../features/contacts/contactsSlice";
+import classNames from "classnames";
 
 const Contacts = () => {
-  const { contactEntries, searchResults, isSearching } = useSelector(
-    (state) => state.contacts
-  );
+  const { contactEntries, searchResults, isSearching, isExpanded } =
+    useSelector((state) => state.contacts);
 
-  const [isExpanded, setExpanded] = useState(false);
   const [expandedID, setExpandedID] = useState(null);
   const [selectedContact, setSelectedContact] = useState({
     id: "",
@@ -22,14 +25,8 @@ const Contacts = () => {
     phone: "",
   });
 
-  const actions = [
-    { label: "About", icon: <FcAbout />, onClick: console.log },
-    { label: "Profile", icon: <FcBusinessman />, onClick: console.log },
-    { label: "Picture", icon: <FcCamera />, onClick: console.log },
-    { label: "Trash", icon: <FcFullTrash />, onClick: console.log },
-  ];
-
   const detailView = useRef(null);
+  const dispatch = useDispatch();
 
   // expand contact callback for each card
   const expandContact = (id) => {
@@ -42,32 +39,37 @@ const Contacts = () => {
     //if contact is already expanded
     if (expandedID == id) {
       // collapse currently expanded conta
-      detailView.current.classList.remove("expanded");
+      dispatch(setIsExpanded(false));
       setExpandedID(null);
     } else {
       // if no contact expanded
-      if (expandedID == null) {
-        //expanded detail view
-        detailView.current.classList.add("expanded");
-      }
+      dispatch(setIsExpanded(true));
       setExpandedID(id);
     }
-    
+
     console.log(selectedContact);
     console.log(`Expanding: ${isExpanded}`);
   };
 
+  var detailClass = classNames({
+    "contacts__detail-view ": true,
+    expanded: isExpanded,
+  });
+
+  useEffect(() => {
+     dispatch(sortContacts());
+  });
+
   return (
     <>
-      <div className="header-spacer"></div>
+      <motion.div className="header-spacer"></motion.div>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         className="contacts"
       >
-        <div className="contacts__list">
-          <FAB actions={actions}></FAB>
+        <motion.div layout className="contacts__list">
           <AnimateSharedLayout>
             {isSearching
               ? searchResults.map((contact) => {
@@ -98,10 +100,10 @@ const Contacts = () => {
                   );
                 })}
           </AnimateSharedLayout>
-        </div>
-        <div ref={detailView} className="contacts__detail-view">
+        </motion.div>
+        <motion.div ref={detailView} className={detailClass}>
           <ContactDetail contact={selectedContact}></ContactDetail>
-        </div>
+        </motion.div>
       </motion.div>
     </>
   );

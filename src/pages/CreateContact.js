@@ -9,7 +9,7 @@
 //   export default CreateContact;
 
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { useDispatch } from "react-redux";
@@ -18,7 +18,7 @@ import { addContact } from "../features/contacts/contactsSlice";
 const CreateContact = () => {
   const dispatch = useDispatch();
 
-  let navigate = useNavigate();
+  
   const {
     register,
     handleSubmit,
@@ -26,6 +26,7 @@ const CreateContact = () => {
     formState: { errors },
   } = useForm();
 
+  let navigate = useNavigate();
   const [isFocused, setFocused] = useState(false);
   const [addSuccess, setAddSuccess] = useState(false);
 
@@ -38,15 +39,15 @@ const CreateContact = () => {
       email: data.email,
       phone: data.phone,
     };
-    dispatch(addContact({newContact }));
+    dispatch(addContact({ newContact }));
     setAddSuccess(true);
   };
 
-  useEffect(()=> {
-    if(addSuccess){
+  useEffect(() => {
+    if (addSuccess) {
       navigate("/contacts");
     }
-  })
+  });
 
   const onError = () => {
     console.log("Submission Error");
@@ -71,7 +72,7 @@ const CreateContact = () => {
       layout
       className="edit-contact"
     >
-        <div className="header-spacer"></div>
+      <div className="header-spacer"></div>
       <motion.div className="edit-contact__card" layout>
         <AnimateSharedLayout>
           <motion.div className="edit-contact__form" layout>
@@ -79,9 +80,8 @@ const CreateContact = () => {
               <p className="form-label"> First Name</p>
               <motion.input
                 whileHover={{ scale: 1.02 }}
-                transition={{ layout: { duration: 1, type: "spring" } }}
+                transition={{ layout: { duration: 0.1, type: "spring" } }}
                 layout
-                
                 className="text-input"
                 {...register("firstName", {
                   required: "name is required",
@@ -94,7 +94,6 @@ const CreateContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-
               />
 
               {errors.firstName && (
@@ -124,7 +123,6 @@ const CreateContact = () => {
                     message: "Minimum length is 2",
                   },
                 })}
-
               />
 
               {errors.lastName && (
@@ -155,7 +153,6 @@ const CreateContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-
               />
 
               {errors.phone && (
@@ -187,7 +184,6 @@ const CreateContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-
               />
 
               {errors.email && (
@@ -203,7 +199,7 @@ const CreateContact = () => {
 
               <input
                 type="submit"
-                value="Save Contact"
+                value="Create Contact"
                 className="submit-btn"
               />
             </form>

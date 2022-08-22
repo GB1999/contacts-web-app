@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import {
   FaUserCircle,
@@ -8,7 +8,15 @@ import {
   FaTrash,
 } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { openModal, setModalContact, setModalType } from "../features/modal/modalSlice";
+
+import {
+  openModal,
+  setModalContact,
+  setModalType,
+} from "../../features/modal/modalSlice";
+
+import { setIsExpanded, setIsSearching, setSearchPrefix } from "../../features/contacts/contactsSlice";
+import "./ContactDetail.css";
 
 const ContactDetail = ({
   contact = {
@@ -20,13 +28,20 @@ const ContactDetail = ({
   },
 }) => {
   const dispatch = useDispatch();
+  const prevContactRef = useRef();
 
   const showDeleteModal = () => {
-    let type = "DELETE"
+    let type = "DELETE";
     dispatch(setModalType(type));
-    dispatch(setModalContact(contact))
+    dispatch(setModalContact(contact));
     dispatch(openModal());
   };
+
+  useEffect(() => {
+    console.log(prevContactRef.current);
+
+    prevContactRef.current = contact;
+  }, [contact]);
 
   return (
     <div className="contact-detail">
@@ -41,32 +56,49 @@ const ContactDetail = ({
             </div>
           </div>
           <div className="contact-detail__divider"></div>
-          <div className="contact-detail__section">
-            <FaPhone></FaPhone>
+
+          <div key={contact.id} className="contact-detail__section">
+            <div className="contact-detail__section__icon">
+              <FaPhone></FaPhone>
+              </div>
             {contact.phone}
           </div>
+
           <div className="contact-detail__divider"></div>
           <div className="contact-detail__section">
-            <FaMailBulk></FaMailBulk>
+          <div className="contact-detail__section__icon">
+              <FaMailBulk></FaMailBulk>
+              </div>
             {contact.email}
           </div>
           <div className="contact-detail__divider"></div>
 
           <div className="contact-detail__spacer"></div>
 
-          <div className="contact-detail__section edit">
-            <FaEdit />
-            <Link to={`/contacts/edit_contact/`} state={{ contact: contact }}>
+          <Link to={`/contacts/edit_contact/`} state={{ contact: contact }}
+            className="contact-detail__section edit"
+            onClick={() => {
+              dispatch(setIsExpanded(false));
+              dispatch(setIsSearching(false));
+              dispatch(setSearchPrefix(""));
+            }}
+          >
+            <div className="contact-detail__section__icon">
+              <FaEdit></FaEdit>
+              </div>
+            
               Edit Contact
             </Link>
-          </div>
+          
           <div
             className="contact-detail__section delete"
             onClick={() => {
               showDeleteModal();
             }}
           >
-            <FaTrash />
+            <div className="contact-detail__section__icon">
+              <FaTrash></FaTrash>
+              </div>
 
             {"Delete Contact"}
           </div>

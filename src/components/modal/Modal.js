@@ -1,5 +1,5 @@
 import { openModal, closeModal } from "../../features/modal/modalSlice";
-import { removeContact } from "../../features/contacts/contactsSlice";
+import { removeContact, setIsExpanded } from "../../features/contacts/contactsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./modal.css";
@@ -16,9 +16,10 @@ const Modal = () => {
          <div className="modal__btn-container">
           <button
             type="button"
-            className="btn modal-btn"
+            className="btn delete modal-btn"
             onClick={() => {
               dispatch(removeContact(modalContact.id));
+              dispatch(setIsExpanded(false));
               dispatch(closeModal());
             }}
           >
