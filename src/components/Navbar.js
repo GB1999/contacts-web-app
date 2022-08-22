@@ -6,9 +6,7 @@ function Navbar() {
     <>
       <nav className="navbar">
         <div className="navbar__container">
-          <NavLink to="/contacts" className="navbar__btn">
-            Contacts
-          </NavLink>
+          
           <NavLink to="/contacts/create_contact" className="navbar__btn">
             Create Contact
           </NavLink>
