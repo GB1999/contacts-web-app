@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -18,7 +18,7 @@ import classNames from "classnames";
 
 const SearchBar = ({ placeholder, data }) => {
   const dispatch = useDispatch();
-
+  const inputRef = useRef(null);
   const {
     register,
     handleSubmit,
@@ -67,6 +67,7 @@ const SearchBar = ({ placeholder, data }) => {
           className="search-bar__input"
           whileHover={{ scale: 1.02 }}
           type="text"
+          ref={inputRef}
           onFocus={() => {
             setFocused(true);
             dispatch(setIsSearching(true));
@@ -86,6 +87,7 @@ const SearchBar = ({ placeholder, data }) => {
           onClick={() => {
             dispatch(setIsSearching(false));
             dispatch(setSearchPrefix(""));
+            inputRef.current.value = "";
             dispatch(sortSearchResults());
           }}
         >

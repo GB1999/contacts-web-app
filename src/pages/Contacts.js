@@ -87,6 +87,7 @@ const Contacts = () => {
                 })
               : contactEntries.map((contact) => {
                   return (
+                    
                     <ContactCard
                       key={contact.id}
                       id={contact.id}

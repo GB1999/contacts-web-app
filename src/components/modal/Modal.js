@@ -1,5 +1,5 @@
 import { openModal, closeModal } from "../../features/modal/modalSlice";
-import { removeContact, setIsExpanded } from "../../features/contacts/contactsSlice";
+import { removeContact, setIsExpanded, setIsSearching } from "../../features/contacts/contactsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./modal.css";
@@ -12,7 +12,7 @@ const Modal = () => {
   return (
     <modal id="myModal" class="modal is-blurred">
       <div class="modal-content">
-      <h4>Are you sure you want to delete ${modalContact.firstName + " " + modalContact.lastName} from contact list?</h4>
+      <h4>Are you sure you want to delete <strong>{modalContact.firstName + " " + modalContact.lastName} </strong> from contact list?</h4>
          <div className="modal__btn-container">
           <button
             type="button"
@@ -20,6 +20,7 @@ const Modal = () => {
             onClick={() => {
               dispatch(removeContact(modalContact.id));
               dispatch(setIsExpanded(false));
+              dispatch(setIsSearching(false));
               dispatch(closeModal());
             }}
           >
