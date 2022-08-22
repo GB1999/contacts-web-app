@@ -21,6 +21,19 @@
     border-radius: 1.5rem;
     max-width: 500px;
     height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .modal__btn-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .modal-btn{
+    width: 100%;
+    margin: 0rem 1rem;
   }
 
   .is-blurred {

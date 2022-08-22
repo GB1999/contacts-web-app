@@ -39,18 +39,21 @@ const Header = () => {
       transition={{ layout: { duration: 1, type: "spring" } }}
     >
       <motion.div className="header-top" layout>
-        <motion.div className="header-top__logo" layout>
-          <NavLink to="/contacts/create_contact" className="header-top__logo">
-            Contact
+       
+          <NavLink to="/contacts" className="header-top__logo" >
+          <img src="https://i.imgur.com/JdzBcpm.png" alt="HOME"  width="180" height="65"/> 
+          CONTACTS
           </NavLink>
-        </motion.div>
-        <motion.div className="header-top__navbar" layout>
+
+       
           <motion.div className="header-top__navigation">
-            <Navbar />
+          <NavLink to="/contacts/create_contact" className="header-top__navigation-btn">
+            Create Contact
+          </NavLink>
           </motion.div>
 
         </motion.div>
-      </motion.div>
+     
       {showSearch && <SearchBar />}
     </motion.div>
   );

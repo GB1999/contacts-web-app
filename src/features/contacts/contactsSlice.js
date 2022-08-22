@@ -43,10 +43,13 @@ const contactsSlice = createSlice({
       );
     },
     removeContact: (state, {payload}) => {
-      console.log(`removing contact ${payload}`);
+      // console.log(`removing contact ${payload}`);
       state.contactEntries = state.contactEntries.filter(
-        (contact) => contact.id !== payload.id
+        function(contact) {if (contact.id == payload){
+          console.log(`found contact ${contact.firstName} for deletion`);
+        } return contact.id != payload}
       );
+      console.log(state.contactEntries)
     },
     setSearch: (state, payload) => {
       console.log(payload);

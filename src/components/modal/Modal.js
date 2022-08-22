@@ -9,26 +9,24 @@ const Modal = () => {
     (state) => state.modal
   );
   const dispatch = useDispatch();
-  const reload=()=>window.location.reload();
   return (
     <modal id="myModal" class="modal is-blurred">
       <div class="modal-content">
       <h4>Are you sure you want to delete ${modalContact.firstName + " " + modalContact.lastName} from contact list?</h4>
-         <div className="btn-container">
+         <div className="modal__btn-container">
           <button
             type="button"
-            className="btn confirm-btn"
+            className="btn modal-btn"
             onClick={() => {
               dispatch(removeContact(modalContact.id));
               dispatch(closeModal());
-              reload();
             }}
           >
             confirm
           </button>
           <button
             type="button"
-            className="btn clear-btn"
+            className="btn modal-btn"
             onClick={() => {
               dispatch(closeModal());
             }}

@@ -8,8 +8,8 @@
 //   };
 //   export default CreateContact;
 
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { useDispatch } from "react-redux";
@@ -18,6 +18,7 @@ import { addContact } from "../features/contacts/contactsSlice";
 const CreateContact = () => {
   const dispatch = useDispatch();
 
+  let navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -26,6 +27,7 @@ const CreateContact = () => {
   } = useForm();
 
   const [isFocused, setFocused] = useState(false);
+  const [addSuccess, setAddSuccess] = useState(false);
 
   const onSubmit = (data, event) => {
     event.preventDefault();
@@ -37,7 +39,14 @@ const CreateContact = () => {
       phone: data.phone,
     };
     dispatch(addContact({newContact }));
+    setAddSuccess(true);
   };
+
+  useEffect(()=> {
+    if(addSuccess){
+      navigate("/contacts");
+    }
+  })
 
   const onError = () => {
     console.log("Submission Error");
@@ -62,6 +71,7 @@ const CreateContact = () => {
       layout
       className="edit-contact"
     >
+        <div className="header-spacer"></div>
       <motion.div className="edit-contact__card" layout>
         <AnimateSharedLayout>
           <motion.div className="edit-contact__form" layout>
@@ -70,13 +80,8 @@ const CreateContact = () => {
               <motion.input
                 whileHover={{ scale: 1.02 }}
                 transition={{ layout: { duration: 1, type: "spring" } }}
-                animate={!isFocused ? "notFocused" : "focused"}
-                variants={focusVarients}
                 layout
-                onFocus={(focus) => {
-                  setFocused(focus);
-                  console.log(isFocused);
-                }}
+                
                 className="text-input"
                 {...register("firstName", {
                   required: "name is required",
@@ -89,7 +94,7 @@ const CreateContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-                placeholder="john"
+
               />
 
               {errors.firstName && (
@@ -107,7 +112,6 @@ const CreateContact = () => {
               <motion.input
                 whileHover={{ scale: 1.02 }}
                 transition={{ layout: { duration: 1, type: "spring" } }}
-                whileFocus={{ borderColor: "#FFF" }}
                 className="text-input"
                 {...register("lastName", {
                   required: "Last name is required",
@@ -120,7 +124,7 @@ const CreateContact = () => {
                     message: "Minimum length is 2",
                   },
                 })}
-                placeholder="doe"
+
               />
 
               {errors.lastName && (
@@ -151,7 +155,7 @@ const CreateContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-                placeholder="1321"
+
               />
 
               {errors.phone && (
@@ -183,7 +187,7 @@ const CreateContact = () => {
                     message: "Minimum Name is 2",
                   },
                 })}
-                placeholder="jd@gmail.com"
+
               />
 
               {errors.email && (
@@ -199,7 +203,7 @@ const CreateContact = () => {
 
               <input
                 type="submit"
-                value="Create Contact"
+                value="Save Contact"
                 className="submit-btn"
               />
             </form>
