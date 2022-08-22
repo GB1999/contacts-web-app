@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 import Contacts from "../pages/Contacts";
@@ -13,6 +13,7 @@ const AnimatedRoutes = () => {
   return (
 
       <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Navigate replace to="/contacts" />} />
         <Route path="/contacts" element={<SharedLayout />}>
           <Route index element={<Contacts />} />
           <Route path="create_contact" element={<CreateContact />} />
