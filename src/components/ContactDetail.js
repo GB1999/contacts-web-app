@@ -7,6 +7,9 @@ import {
   FaEdit,
   FaTrash,
 } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { openModal, setModalContact, setModalType } from "../features/modal/modalSlice";
+
 const ContactDetail = ({
   contact = {
     id: "",
@@ -16,6 +19,14 @@ const ContactDetail = ({
     phone: "",
   },
 }) => {
+  const dispatch = useDispatch();
+
+  const showDeleteModal = () => {
+    let type = "DELETE"
+    dispatch(setModalType(type));
+    dispatch(setModalContact(contact))
+    dispatch(openModal());
+  };
 
   return (
     <div className="contact-detail">
@@ -45,11 +56,16 @@ const ContactDetail = ({
 
           <div className="contact-detail__section edit">
             <FaEdit />
-            <Link to={`/contacts/edit_contact/`} state={{contact:contact}}>
+            <Link to={`/contacts/edit_contact/`} state={{ contact: contact }}>
               Edit Contact
             </Link>
           </div>
-          <div className="contact-detail__section delete">
+          <div
+            className="contact-detail__section delete"
+            onClick={() => {
+              showDeleteModal();
+            }}
+          >
             <FaTrash />
 
             {"Delete Contact"}

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import Modal from "../components/Modal";
+import Modal from "../components/modal/Modal";
 import Header from "../components/header/Header";
 import SearchBar from "../components/SearchBar";
 import FAB from "../components/fab/fab";

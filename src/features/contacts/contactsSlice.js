@@ -42,6 +42,12 @@ const contactsSlice = createSlice({
         (contact) => !state.contactsToDelete.includes(contact.id)
       );
     },
+    removeContact: (state, {payload}) => {
+      console.log(`removing contact ${payload}`);
+      state.contactEntries = state.contactEntries.filter(
+        (contact) => contact.id !== payload.id
+      );
+    },
     setSearch: (state, payload) => {
       console.log(payload);
       state.isSearching = payload;
@@ -74,6 +80,7 @@ export const {
   addContact,
   setDelete,
   removeContacts,
+  removeContact,
   editContact,
   setSearch,
   searchContacts,

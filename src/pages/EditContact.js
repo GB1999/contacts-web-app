@@ -15,6 +15,7 @@ import { motion, AnimateSharedLayout } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { editContact } from "../features/contacts/contactsSlice";
 
+
 const EditContact = () => {
   const dispatch = useDispatch();
   const {
