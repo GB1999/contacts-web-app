@@ -45,7 +45,7 @@ const Header = () => {
       <motion.div className="header-top" layout>
         <Link to="/contacts" className="header-top__logo">
           <img
-            src="https://i.imgur.com/JdzBcpm.png"
+            src="../../visa-logo.png"
             alt="HOME"
             width="180"
             height="65"
